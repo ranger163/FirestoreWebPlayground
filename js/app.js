@@ -35,16 +35,29 @@ form.addEventListener('submit', (event) => {
 });
 
 // Getting cafe list from firestore
-db.collection('cafes').get().then((snapshot) => {
-    snapshot.docs.forEach(doc => {
-        renderCafe(doc)
-    })
-});
+// db.collection('cafes').get().then((snapshot) => {
+//     snapshot.docs.forEach(doc => {
+//         renderCafe(doc)
+//     })
+// });
 
 // Delete record from firestore
 function deleteRecordFromFirestore(cross) {
-cross.addEventListener('click',(event)=>{
-    let id =event.target.parentElement.getAttribute('data-id'); // Getting id of the doc we want to remove
-    db.collection('cafes').doc(id).delete();
-})
+    cross.addEventListener('click', (event) => {
+        let id = event.target.parentElement.getAttribute('data-id'); // Getting id of the doc we want to remove
+        db.collection('cafes').doc(id).delete();
+    })
 }
+
+// Realtime data listener
+db.collection('cafes').onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+        if (change.type === 'added') {
+            renderCafe(change.doc);
+        } else if (change.type === 'removed') {
+            let li = cafeList.querySelector('[data-id=' + change.doc.id + ']');
+            cafeList.removeChild(li);
+        }
+    })
+});
