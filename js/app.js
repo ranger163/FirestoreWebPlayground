@@ -18,6 +18,8 @@ function renderCafe(doc) {
     li.appendChild(cross);
 
     cafeList.appendChild(li);
+
+    deleteRecordFromFirestore(cross);
 }
 
 // Saving data into firestore
@@ -38,3 +40,11 @@ db.collection('cafes').get().then((snapshot) => {
         renderCafe(doc)
     })
 });
+
+// Delete record from firestore
+function deleteRecordFromFirestore(cross) {
+cross.addEventListener('click',(event)=>{
+    let id =event.target.parentElement.getAttribute('data-id'); // Getting id of the doc we want to remove
+    db.collection('cafes').doc(id).delete();
+})
+}
