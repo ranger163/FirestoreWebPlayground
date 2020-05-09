@@ -1,6 +1,6 @@
 body {
     background: #eab0dc;
-    font-family: ubuntu;
+    font-family: ubuntu, monospace;
 }
 
 h1 {
@@ -53,7 +53,7 @@ li span:nth-child(2) {
 li div {
     position: absolute;
     top: 0;
-    right: 0px;
+    right: 0;
     background: rgba(255, 255, 255, 0.6);
     width: 40px;
     text-align: center;
@@ -68,7 +68,6 @@ form input {
     margin: 0;
     border: 0;
     border-bottom: 1px solid #eee;
-    margin: 0 1%;
     padding: 10px;
     display: block;
     box-sizing: border-box;
@@ -94,9 +93,9 @@ button {
     border-radius: 10px;
     padding: 13px;
     width: 14%;
-    box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: -1px 0 1px rgba(0, 0, 0, 0.1);
     font-weight: bold;
-    font-family: ubuntu;
+    font-family: ubuntu, monospace;
     letter-spacing: 1px;
     color: #999;
 }

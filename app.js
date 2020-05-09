@@ -1,4 +1,5 @@
 const cafeList = document.querySelector('#cafe-list');
+const form = document.querySelector('#add-cafe-form');
 
 //Create element and render cafe
 function renderCafe(doc) {
@@ -15,6 +16,18 @@ function renderCafe(doc) {
 
     cafeList.appendChild(li);
 }
+
+// Saving data into firestore
+form.addEventListener('submit', (event) => {
+    event.preventDefault(); // To prevent default page reload when clicking submit button
+    db.collection('cafes').add({
+        name: form.name.value,
+        city: form.city.value
+    });
+
+    form.name.value = '';
+    form.city.value = '';
+});
 
 // Getting cafe list from firestore
 db.collection('cafes').get().then((snapshot) => {
